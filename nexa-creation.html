@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexa Creation – Where Creativity Meets Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --gold: #D4A853;
+    --gold-light: #F0C87A;
+    --gold-dark: #A07830;
+    --deep: #070B14;
+    --deep2: #0D1220;
+    --card-bg: rgba(255,255,255,0.04);
+    --border: rgba(212,168,83,0.18);
+    --text: #E8E4DC;
+    --muted: #8A8478;
+    --accent: #5B8DEF;
+    --accent2: #C84B9E;
+    --whatsapp: #25D366;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--deep);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99998;
+    transition: all 0.15s ease;
+    opacity: 0.5;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.4;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+    padding: 18px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(7,11,20,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: #000;
+    box-shadow: 0 0 20px rgba(212,168,83,0.4);
+  }
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+  .logo-sub {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: -2px;
+  }
+
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #000 !important;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.08em;
+    transition: all 0.3s !important;
+    box-shadow: 0 0 20px rgba(212,168,83,0.3);
+  }
+  .nav-cta:hover {
+    box-shadow: 0 0 35px rgba(212,168,83,0.6) !important;
+    transform: translateY(-1px);
+  }
+  .nav-cta::after { display: none !important; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 5% 80px;
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(212,168,83,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,168,83,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 20s linear infinite;
+  }
+  @keyframes gridMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+
+  .hero-orbs {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.15;
+    animation: orbFloat 8s ease-in-out infinite;
+  }
+  .orb1 { width: 500px; height: 500px; background: var(--gold); top: -100px; left: -150px; animation-delay: 0s; }
+  .orb2 { width: 400px; height: 400px; background: var(--accent2); top: 50%; right: -100px; animation-delay: -3s; }
+  .orb3 { width: 300px; height: 300px; background: var(--accent); bottom: -50px; left: 40%; animation-delay: -5s; }
+  @keyframes orbFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; max-width: 900px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(212,168,83,0.1);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge .dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 1.5s ease infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  h1.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-title .line1 { color: var(--text); display: block; }
+  .hero-title .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--gold), var(--accent2), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-desc {
+    font-size: 18px; color: var(--muted); max-width: 600px;
+    margin: 0 auto 48px; line-height: 1.7;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  .btn-primary {
+    padding: 16px 40px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #000;
+    border: none; border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(212,168,83,0.35);
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 50px rgba(212,168,83,0.55);
+  }
+  .btn-outline {
+    padding: 16px 40px;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    display: flex; gap: 60px; justify-content: center;
+    margin-top: 80px;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.8s 0.6s ease both;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 36px; font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SECTION COMMON ===== */
+  section { padding: 100px 5%; }
+
+  .section-header { text-align: center; margin-bottom: 70px; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  h2.section-title span {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .section-desc { color: var(--muted); font-size: 16px; max-width: 550px; margin: 0 auto; line-height: 1.7; }
+
+  /* ===== SERVICES GRID ===== */
+  .services-section { background: var(--deep2); }
+
+  .services-outer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .service-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--card-accent, rgba(212,168,83,0.06)), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+    border-radius: 16px;
+  }
+  .service-card:hover::before { opacity: 1; }
+  .service-card:hover {
+    border-color: rgba(212,168,83,0.45);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .card-icon-wrap {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .card-items {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .card-items li {
+    font-size: 13px; color: var(--muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-items li::before {
+    content: '';
+    width: 4px; height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* CATEGORY COLORS */
+  .cat-invites .card-icon-wrap { background: rgba(212,168,83,0.12); color: var(--gold); }
+  .cat-video .card-icon-wrap { background: rgba(200,75,158,0.12); color: var(--accent2); }
+  .cat-social .card-icon-wrap { background: rgba(91,141,239,0.12); color: var(--accent); }
+  .cat-design .card-icon-wrap { background: rgba(78,205,196,0.12); color: #4ECDC4; }
+  .cat-restaurant .card-icon-wrap { background: rgba(255,107,53,0.12); color: #FF6B35; }
+  .cat-web .card-icon-wrap { background: rgba(150,91,239,0.12); color: #965BEF; }
+  .cat-event .card-icon-wrap { background: rgba(255,59,130,0.12); color: #FF3B82; }
+  .cat-media .card-icon-wrap { background: rgba(0,200,83,0.12); color: #00C853; }
+  .cat-vendor .card-icon-wrap { background: rgba(255,196,0,0.12); color: #FFC400; }
+  .cat-corporate .card-icon-wrap { background: rgba(91,141,239,0.12); color: var(--accent); }
+  .cat-premium .card-icon-wrap { background: rgba(212,168,83,0.2); color: var(--gold-light); }
+
+  /* ===== FEATURES BENTO ===== */
+  .features-section { background: var(--deep); }
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+  }
+  .bento-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+  .bento-item:hover {
+    border-color: rgba(212,168,83,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  }
+  .bento-a { grid-column: span 8; }
+  .bento-b { grid-column: span 4; }
+  .bento-c { grid-column: span 4; }
+  .bento-d { grid-column: span 4; }
+  .bento-e { grid-column: span 4; }
+  .bento-f { grid-column: span 6; }
+  .bento-g { grid-column: span 6; }
+
+  .bento-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 72px; font-weight: 900;
+    color: rgba(212,168,83,0.08);
+    position: absolute;
+    bottom: -10px; right: 20px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .bento-label {
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold); font-weight: 600;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .bento-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .bento-body {
+    color: var(--muted); font-size: 14px; line-height: 1.7;
+  }
+
+  /* Language badges */
+  .lang-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  .lang-badge {
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 12px;
+    color: var(--gold);
+    background: rgba(212,168,83,0.06);
+    font-weight: 600;
+  }
+
+  /* Animated rings */
+  .ring-anim {
+    position: absolute;
+    right: 30px; top: 50%;
+    transform: translateY(-50%);
+    width: 120px; height: 120px;
+  }
+  .ring-anim .ring {
+    position: absolute; border-radius: 50%;
+    border: 1.5px solid rgba(212,168,83,0.3);
+    animation: ringExpand 2s ease-in-out infinite;
+  }
+  .ring:nth-child(1) { width: 40px; height: 40px; top: 40px; left: 40px; animation-delay: 0s; }
+  .ring:nth-child(2) { width: 80px; height: 80px; top: 20px; left: 20px; animation-delay: 0.4s; }
+  .ring:nth-child(3) { width: 120px; height: 120px; top: 0; left: 0; animation-delay: 0.8s; }
+  @keyframes ringExpand {
+    0% { opacity: 0.8; transform: scale(0.9); }
+    100% { opacity: 0; transform: scale(1.2); }
+  }
+
+  /* ===== PROCESS ===== */
+  .process-section { background: var(--deep2); }
+  .process-steps {
+    display: flex;
+    gap: 0;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .process-step {
+    flex: 1;
+    min-width: 200px;
+    max-width: 220px;
+    text-align: center;
+    position: relative;
+    padding: 0 20px;
+  }
+  .process-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 36px; right: -20px;
+    width: 40px; height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .step-circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: rgba(212,168,83,0.1);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--gold);
+    transition: all 0.4s;
+    position: relative;
+  }
+  .process-step:hover .step-circle {
+    background: var(--gold);
+    color: #000;
+    box-shadow: 0 0 30px rgba(212,168,83,0.5);
+  }
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials-section { background: var(--deep); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .testimonial-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.4s;
+    position: relative;
+  }
+  .testimonial-card:hover {
+    border-color: rgba(212,168,83,0.4);
+    transform: translateY(-4px);
+  }
+  .stars { color: var(--gold); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+  .testimonial-text { font-size: 15px; color: var(--text); line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 16px; color: #000;
+  }
+  .author-name { font-size: 15px; font-weight: 600; color: var(--text); }
+  .author-role { font-size: 12px; color: var(--muted); }
+  .quote-mark {
+    position: absolute; top: 20px; right: 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 80px; color: rgba(212,168,83,0.07);
+    line-height: 1; pointer-events: none;
+  }
+
+  /* ===== CTA SECTION ===== */
+  .cta-section {
+    background: var(--deep2);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(212,168,83,0.08), transparent);
+  }
+  .cta-inner { position: relative; z-index: 1; }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .cta-title span { color: var(--gold); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #050810;
+    padding: 80px 5% 40px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-brand .logo-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .footer-about { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+  .footer-socials { display: flex; gap: 12px; }
+  .social-btn {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    font-size: 16px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,168,83,0.1); transform: translateY(-2px); }
+  .social-btn.instagram:hover { border-color: #E1306C; color: #E1306C; background: rgba(225,48,108,0.08); }
+  .social-btn.whatsapp:hover { border-color: var(--whatsapp); color: var(--whatsapp); background: rgba(37,211,102,0.08); }
+
+  .footer-col h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a {
+    font-size: 13px; color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-links a::before { content: '→'; font-size: 11px; opacity: 0.5; }
+
+  .contact-items { display: flex; flex-direction: column; gap: 16px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 12px; }
+  .contact-item .icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(212,168,83,0.1);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 14px;
+    flex-shrink: 0;
+  }
+  .contact-item .info { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .contact-item .info strong { color: var(--text); display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; }
+
+  .footer-bottom {
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-copy { font-size: 13px; color: var(--muted); }
+  .footer-copy span { color: var(--gold); }
+  .footer-tagline {
+    font-size: 12px; color: var(--muted);
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+
+  /* ===== WHATSAPP FLOAT ===== */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    z-index: 9500;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+  }
+  .wa-tooltip {
+    background: rgba(7,11,20,0.95);
+    border: 1px solid rgba(37,211,102,0.3);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--text);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s;
+    pointer-events: none;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+  .wa-tooltip strong { color: var(--whatsapp); }
+  .whatsapp-float:hover .wa-tooltip { opacity: 1; transform: translateX(0); }
+  .wa-btn {
+    width: 60px; height: 60px;
+    background: var(--whatsapp);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.45);
+    transition: all 0.3s;
+    animation: waPulse 2.5s ease infinite;
+    cursor: pointer;
+  }
+  .wa-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 45px rgba(37,211,102,0.65);
+    animation: none;
+  }
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 8px 30px rgba(37,211,102,0.45); }
+    50% { box-shadow: 0 8px 50px rgba(37,211,102,0.7), 0 0 0 15px rgba(37,211,102,0.08); }
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+  /* ===== ANIMATIONS ===== */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Marquee */
+  .marquee-strip {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    padding: 16px 0;
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex; gap: 0;
+    animation: marqueeScroll 20s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-size: 13px; font-weight: 700;
+    color: #000;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0 40px;
+    display: flex; align-items: center; gap: 16px;
+    white-space: nowrap;
+  }
+  .marquee-item::after { content: '✦'; opacity: 0.6; }
+  @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .bento-a, .bento-b, .bento-c, .bento-d, .bento-e, .bento-f, .bento-g { grid-column: span 12; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 600px) {
+    .services-outer-grid { grid-template-columns: 1fr; }
+    .process-step { min-width: 100%; }
+    .process-step::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">N</div>
+    <div>
+      <span class="logo-text">Nexa Creation</span>
+      <span class="logo-sub">Where Creativity Meets Tech</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="https://wa.me/917093528048" target="_blank" class="nav-cta"><i class="fab fa-whatsapp"></i> Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Hyderabad's #1 Creative Studio
+    </div>
+    <h1 class="hero-title">
+      <span class="line1">Crafting Moments,</span>
+      <span class="line2">Creating Magic</span>
+    </h1>
+    <p class="hero-desc">From breathtaking wedding invitations to cutting-edge digital experiences — Nexa Creation brings your vision to life with the perfect blend of artistry and technology.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/917093528048" target="_blank" class="btn-primary">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+      <a href="#services" class="btn-outline">
+        Explore Services <i class="fas fa-arrow-down"></i>
+      </a>
+    </div>
+    <div class="stats-strip">
+      <div class="stat">
+        <span class="stat-num" data-count="5000">0</span>
+        <span class="stat-label">Happy Clients</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="11">0</span>
+        <span class="stat-label">Service Categories</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="3">0</span>
+        <span class="stat-label">Languages Supported</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="8">0</span>
+        <span class="stat-label">Years of Excellence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Wedding Invitations</span>
+    <span class="marquee-item">Animated Videos</span>
+    <span class="marquee-item">Logo Design</span>
+    <span class="marquee-item">Restaurant Menus</span>
+    <span class="marquee-item">Event Planning</span>
+    <span class="marquee-item">Photography Booking</span>
+    <span class="marquee-item">Corporate Branding</span>
+    <span class="marquee-item">AI Invitations</span>
+    <span class="marquee-item">Social Media</span>
+    <span class="marquee-item">Wedding Invitations</span>
+    <span class="marquee-item">Animated Videos</span>
+    <span class="marquee-item">Logo Design</span>
+    <span class="marquee-item">Restaurant Menus</span>
+    <span class="marquee-item">Event Planning</span>
+    <span class="marquee-item">Photography Booking</span>
+    <span class="marquee-item">Corporate Branding</span>
+    <span class="marquee-item">AI Invitations</span>
+    <span class="marquee-item">Social Media</span>
+  </div>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<section class="services-section" id="services">
+  <div class="section-header reveal">
+    <span class="section-tag">✦ Our Services</span>
+    <h2 class="section-title">Everything You Need,<br><span>All in One Place</span></h2>
+    <p class="section-desc">A complete creative studio offering 11 categories of premium services — from traditional invitations to AI-powered digital experiences.</p>
+  </div>
+  <div class="services-outer-grid">
+
+    <!-- Invitations -->
+    <div class="service-card cat-invites reveal">
+      <div class="card-icon-wrap"><i class="fas fa-envelope-open-text"></i></div>
+      <div class="card-title">Invitations & Greetings</div>
+      <ul class="card-items">
+        <li>Wedding Invitations (Digital & Printed)</li>
+        <li>Birthday Invitations & Personalized Wishes</li>
+        <li>Engagement, Anniversary & Reception</li>
+        <li>Baby Shower & Naming Ceremony</li>
+        <li>Housewarming Invitations</li>
+        <li>Farewell, Freshers & Graduation</li>
+        <li>Retirement Party Invitations</li>
+        <li>Festival Greetings & E-Cards</li>
+        <li>Save-the-Date Designs & RSVP Management</li>
+      </ul>
+    </div>
+
+    <!-- Video -->
+    <div class="service-card cat-video reveal">
+      <div class="card-icon-wrap"><i class="fas fa-film"></i></div>
+      <div class="card-title">Video & Animation Services</div>
+      <ul class="card-items">
+        <li>Animated Video Invitations</li>
+        <li>3D Invitation Videos</li>
+        <li>Couple Story Videos</li>
+        <li>Birthday Memory Videos</li>
+        <li>LED Screen Event Videos</li>
+        <li>Event Highlights & Reels Creation</li>
+      </ul>
+    </div>
+
+    <!-- Social Media -->
+    <div class="service-card cat-social reveal">
+      <div class="card-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+      <div class="card-title">Digital & Social Media</div>
+      <ul class="card-items">
+        <li>WhatsApp Invitation Cards</li>
+        <li>Instagram / Facebook Event Posts</li>
+        <li>Social Media Marketing</li>
+        <li>Festival Promotion Posts</li>
+        <li>Business Advertisements</li>
+        <li>YouTube Thumbnail Design</li>
+      </ul>
+    </div>
+
+    <!-- Design -->
+    <div class="service-card cat-design reveal">
+      <div class="card-icon-wrap"><i class="fas fa-palette"></i></div>
+      <div class="card-title">Design & Branding</div>
+      <ul class="card-items">
+        <li>Logo Design</li>
+        <li>Business Card Design</li>
+        <li>Brochure & Flyer Design</li>
+        <li>Banner & Flex Design</li>
+        <li>Packaging Design</li>
+        <li>Brand Identity Kit</li>
+      </ul>
+    </div>
+
+    <!-- Restaurant -->
+    <div class="service-card cat-restaurant reveal">
+      <div class="card-icon-wrap"><i class="fas fa-utensils"></i></div>
+      <div class="card-title">Restaurant & Hotel Services</div>
+      <ul class="card-items">
+        <li>Restaurant Menu Design</li>
+        <li>Hotel Menu Design</li>
+        <li>QR Code Menus</li>
+        <li>Digital Ordering Menus</li>
+        <li>Table Tent Cards</li>
+        <li>Food Photography</li>
+      </ul>
+    </div>
+
+    <!-- Web -->
+    <div class="service-card cat-web reveal">
+      <div class="card-icon-wrap"><i class="fas fa-globe"></i></div>
+      <div class="card-title">Website & Technology</div>
+      <ul class="card-items">
+        <li>Business Websites</li>
+        <li>Event Landing Pages</li>
+        <li>Online RSVP Websites</li>
+        <li>QR Code Generation</li>
+        <li>Digital Business Cards</li>
+        <li>Online Portfolio Websites</li>
+      </ul>
+    </div>
+
+    <!-- Event -->
+    <div class="service-card cat-event reveal">
+      <div class="card-icon-wrap"><i class="fas fa-gift"></i></div>
+      <div class="card-title">Event & Surprise Planning</div>
+      <ul class="card-items">
+        <li>Surprise Birthday Planning</li>
+        <li>Proposal Arrangements</li>
+        <li>Anniversary Surprises</li>
+        <li>Gift Selection & Delivery</li>
+        <li>Decoration Planning</li>
+        <li>Customized Return Gifts</li>
+      </ul>
+    </div>
+
+    <!-- Media -->
+    <div class="service-card cat-media reveal">
+      <div class="card-icon-wrap"><i class="fas fa-camera"></i></div>
+      <div class="card-title">Media Services</div>
+      <ul class="card-items">
+        <li>Photography Booking</li>
+        <li>Videography Booking</li>
+        <li>Drone Photography</li>
+        <li>Live Streaming of Events</li>
+        <li>Photo Editing & Retouching</li>
+        <li>Album Design</li>
+      </ul>
+    </div>
+
+    <!-- Vendor -->
+    <div class="service-card cat-vendor reveal">
+      <div class="card-icon-wrap"><i class="fas fa-music"></i></div>
+      <div class="card-title">Vendor Services</div>
+      <ul class="card-items">
+        <li>DJ Booking</li>
+        <li>Catering Services</li>
+        <li>Decoration Services</li>
+        <li>Makeup Artist Booking</li>
+        <li>Mehendi Artist Booking</li>
+        <li>Sound & Lighting Arrangements</li>
+      </ul>
+    </div>
+
+    <!-- Corporate -->
+    <div class="service-card cat-corporate reveal">
+      <div class="card-icon-wrap"><i class="fas fa-briefcase"></i></div>
+      <div class="card-title">Corporate Services</div>
+      <ul class="card-items">
+        <li>Corporate Event Invitations</li>
+        <li>Conference & Seminar Designs</li>
+        <li>Employee Appreciation Certificates</li>
+        <li>Company Event Branding</li>
+        <li>Digital Certificates</li>
+        <li>Training Event Materials</li>
+      </ul>
+    </div>
+
+    <!-- Premium / AI -->
+    <div class="service-card cat-premium reveal">
+      <div class="card-icon-wrap"><i class="fas fa-robot"></i></div>
+      <div class="card-title">Premium AI Features</div>
+      <ul class="card-items">
+        <li>AI-Powered Invitation Generator</li>
+        <li>Multi-Language Invitations (Telugu, English, Hindi)</li>
+        <li>Voice Invitation Messages</li>
+        <li>Personalized QR Invitations</li>
+        <li>Event Countdown Pages</li>
+        <li>Guest Management Dashboard</li>
+        <li>Online Ticket Booking for Events</li>
+        <li>Live Event Updates via WhatsApp</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FEATURES BENTO ===== -->
+<section class="features-section" id="features">
+  <div class="section-header reveal">
+    <span class="section-tag">✦ Why Nexa Creation</span>
+    <h2 class="section-title">Built for the<br><span>Modern Creator</span></h2>
+    <p class="section-desc">Cutting-edge technology meets timeless creativity — we deliver experiences that leave lasting impressions.</p>
+  </div>
+  <div class="bento-grid">
+    <div class="bento-item bento-a reveal" style="display:flex;align-items:center;gap:48px;">
+      <div style="flex:1;">
+        <span class="bento-label">✦ AI Technology</span>
+        <div class="bento-heading">AI-Powered Invitation Generator for Every Occasion</div>
+        <div class="bento-body">Our intelligent engine crafts personalized, beautiful invitations in seconds — tailored to your style, language, and event type. Simply describe your vision, and watch the magic happen.</div>
+      </div>
+      <div class="ring-anim" style="position:relative;transform:none;flex-shrink:0;">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <i class="fas fa-robot" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--gold);font-size:28px;z-index:2;"></i>
+      </div>
+      <div class="bento-num">01</div>
+    </div>
+
+    <div class="bento-item bento-b reveal" style="text-align:center;">
+      <span class="bento-label">✦ Languages</span>
+      <div class="bento-heading" style="font-size:22px;">Multi-Language Support</div>
+      <div class="bento-body">Reach every guest in their heart language.</div>
+      <div class="lang-badges" style="justify-content:center;margin-top:24px;">
+        <span class="lang-badge">తెలుగు</span>
+        <span class="lang-badge">English</span>
+        <span class="lang-badge">हिंदी</span>
+      </div>
+      <div class="bento-num">02</div>
+    </div>
+
+    <div class="bento-item bento-c reveal">
+      <span class="bento-label">✦ Lightning Fast</span>
+      <div class="bento-heading">Delivered in 24 Hours</div>
+      <div class="bento-body">Urgent order? No problem. Most designs delivered within 24 hours without compromising quality.</div>
+      <div style="margin-top:24px;display:flex;gap:8px;">
+        <div style="flex:1;background:rgba(212,168,83,0.1);border-radius:8px;padding:16px;text-align:center;">
+          <div style="font-family:'Orbitron',sans-serif;font-size:22px;color:var(--gold);font-weight:700;">24h</div>
+          <div style="font-size:11px;color:var(--muted);">Turnaround</div>
+        </div>
+        <div style="flex:1;background:rgba(212,168,83,0.1);border-radius:8px;padding:16px;text-align:center;">
+          <div style="font-family:'Orbitron',sans-serif;font-size:22px;color:var(--gold);font-weight:700;">∞</div>
+          <div style="font-size:11px;color:var(--muted);">Revisions</div>
+        </div>
+      </div>
+      <div class="bento-num">03</div>
+    </div>
+
+    <div class="bento-item bento-d reveal">
+      <span class="bento-label">✦ Guest Management</span>
+      <div class="bento-heading">Smart RSVP Dashboard</div>
+      <div class="bento-body">Track guests, manage RSVPs, and send automated WhatsApp reminders — all from one beautiful dashboard.</div>
+      <div class="bento-num">04</div>
+    </div>
+
+    <div class="bento-item bento-e reveal">
+      <span class="bento-label">✦ QR Technology</span>
+      <div class="bento-heading">Personalized QR Invitations</div>
+      <div class="bento-body">Each guest receives a unique QR code that unlocks their personalized event experience.</div>
+      <div class="bento-num">05</div>
+    </div>
+
+    <div class="bento-item bento-f reveal">
+      <span class="bento-label">✦ Real-time Updates</span>
+      <div class="bento-heading">Live Event Updates via WhatsApp</div>
+      <div class="bento-body">Keep guests informed in real-time with automated WhatsApp messages for schedule changes, venue directions, countdown reminders, and event highlights — all beautifully branded.</div>
+      <div class="bento-num">06</div>
+    </div>
+
+    <div class="bento-item bento-g reveal" style="background:linear-gradient(135deg,rgba(212,168,83,0.12),rgba(200,75,158,0.08));border-color:rgba(212,168,83,0.3);">
+      <span class="bento-label">✦ Premium Quality</span>
+      <div class="bento-heading">Every Pixel, Perfected</div>
+      <div class="bento-body">Our designers obsess over every detail — typography, color harmony, animation timing — because your moments deserve nothing less than perfection. From print-ready files to pixel-perfect digital assets, we deliver exceptional quality every single time.</div>
+      <div style="display:flex;gap:8px;margin-top:24px;flex-wrap:wrap;">
+        <span style="background:rgba(212,168,83,0.1);border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:12px;color:var(--gold);">Print-Ready</span>
+        <span style="background:rgba(212,168,83,0.1);border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:12px;color:var(--gold);">4K Quality</span>
+        <span style="background:rgba(212,168,83,0.1);border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:12px;color:var(--gold);">All Formats</span>
+        <span style="background:rgba(212,168,83,0.1);border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:12px;color:var(--gold);">WhatsApp-Ready</span>
+      </div>
+      <div class="bento-num">07</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="process-section" id="process">
+  <div class="section-header reveal">
+    <span class="section-tag">✦ How It Works</span>
+    <h2 class="section-title">Simple. Fast.<br><span>Beautiful.</span></h2>
+    <p class="section-desc">Getting your perfect creative work is effortless — just follow these four simple steps.</p>
+  </div>
+  <div class="process-steps reveal">
+    <div class="process-step">
+      <div class="step-circle">01</div>
+      <div class="step-title">Contact Us</div>
+      <div class="step-desc">Reach out via WhatsApp or our website. Tell us your vision and requirements.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">02</div>
+      <div class="step-title">Share Details</div>
+      <div class="step-desc">Provide event details, preferences, photos, and any specific requests.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">03</div>
+      <div class="step-title">We Create</div>
+      <div class="step-desc">Our team crafts your personalized design with unlimited revisions until it's perfect.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">04</div>
+      <div class="step-title">Receive & Share</div>
+      <div class="step-desc">Get your final files in all formats ready to print or share digitally with your guests.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials-section" id="testimonials">
+  <div class="section-header reveal">
+    <span class="section-tag">✦ Client Stories</span>
+    <h2 class="section-title">Moments They'll<br><span>Remember Forever</span></h2>
+    <p class="section-desc">Join thousands of happy clients who trusted Nexa Creation with their most precious moments.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">The animated wedding invitation was absolutely breathtaking! Every single guest called us asking how we made it. Nexa Creation truly understood our vision and delivered something magical.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">P</div>
+        <div>
+          <div class="author-name">Priya Sharma</div>
+          <div class="author-role">Wedding Client, Hyderabad</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">The restaurant menu redesign transformed our customer experience completely. The QR code menus are sleek and the food photography was stunning. Highly recommend!</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">R</div>
+        <div>
+          <div class="author-name">Ravi Kumar</div>
+          <div class="author-role">Restaurant Owner, Hyderabad</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Got my company's complete branding done — logo, business cards, website, and social media templates. Professional, fast, and incredibly talented team. Will use again!</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">Aarav Mehta</div>
+          <div class="author-role">Business Owner, Secunderabad</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">The birthday surprise planning was executed flawlessly. The decoration, the personalized video, everything was perfect. My wife was in tears of joy. Thank you Nexa!</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <div class="author-name">Sanjay Reddy</div>
+          <div class="author-role">Event Client, Hyderabad</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Telugu invitation with English & Hindi support was something I couldn't find anywhere else! The voice invitation feature was a massive hit. All my relatives loved it.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">L</div>
+        <div>
+          <div class="author-name">Lakshmi Devi</div>
+          <div class="author-role">Wedding Client, Vizag</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Corporate event branding for our annual conference was done to absolute perfection. On-time, professional, and the quality was outstanding. Will definitely work with them again!</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">V</div>
+        <div>
+          <div class="author-name">Vikram Nair</div>
+          <div class="author-role">HR Manager, Tech Company</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <span class="section-tag">✦ Ready to Begin?</span>
+    <h2 class="cta-title">Let's Create Something<br><span>Extraordinary</span></h2>
+    <p class="section-desc" style="margin:24px auto 48px;">Your dream event deserves the perfect invitation. Connect with us today and let our creative team bring your vision to life.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://wa.me/917093528048" target="_blank" class="btn-primary" style="font-size:16px;padding:18px 48px;">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+      <a href="mailto:nexacreation@gmail.com" class="btn-outline" style="font-size:16px;padding:18px 48px;">
+        <i class="fas fa-envelope"></i> Send an Email
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap">
+        <div class="logo-icon" style="width:48px;height:48px;font-size:20px;">N</div>
+        <div>
+          <span class="logo-text" style="font-size:24px;">Nexa Creation</span>
+          <span class="logo-sub">Where Creativity Meets Technology</span>
+        </div>
+      </div>
+      <p class="footer-about">Hyderabad's premier creative studio specializing in digital invitations, branding, event planning, and technology-driven creative solutions. We craft experiences that leave lasting impressions.</p>
+      <div class="footer-socials">
+        <a href="https://instagram.com/nexacreation" target="_blank" class="social-btn instagram" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/917093528048" target="_blank" class="social-btn whatsapp" title="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="mailto:nexacreation@gmail.com" class="social-btn" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://youtube.com/@nexacreation" target="_blank" class="social-btn" title="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://facebook.com/nexacreation" target="_blank" class="social-btn" title="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul class="footer-links">
+        <li><a href="#services">Invitations & Greetings</a></li>
+        <li><a href="#services">Video & Animation</a></li>
+        <li><a href="#services">Social Media</a></li>
+        <li><a href="#services">Design & Branding</a></li>
+        <li><a href="#services">Restaurant Services</a></li>
+        <li><a href="#services">Website & Tech</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>More Services</h4>
+      <ul class="footer-links">
+        <li><a href="#services">Event Planning</a></li>
+        <li><a href="#services">Media Services</a></li>
+        <li><a href="#services">Vendor Services</a></li>
+        <li><a href="#services">Corporate Services</a></li>
+        <li><a href="#services">AI Features</a></li>
+        <li><a href="#process">How It Works</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="icon"><i class="fab fa-whatsapp"></i></div>
+          <div class="info">
+            <strong>WhatsApp</strong>
+            <a href="https://wa.me/917093528048" target="_blank" style="color:var(--whatsapp);text-decoration:none;">+91 70935 28048</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon"><i class="fas fa-envelope"></i></div>
+          <div class="info">
+            <strong>Email</strong>
+            <a href="mailto:nexacreation@gmail.com" style="color:var(--muted);text-decoration:none;">nexacreation@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon"><i class="fab fa-instagram"></i></div>
+          <div class="info">
+            <strong>Instagram</strong>
+            <a href="https://instagram.com/nexacreation" target="_blank" style="color:var(--muted);text-decoration:none;">@nexacreation</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="info">
+            <strong>Address</strong>
+            Hyderabad, Telangana, India — 500001
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon"><i class="fas fa-clock"></i></div>
+          <div class="info">
+            <strong>Working Hours</strong>
+            Mon–Sat: 9:00 AM – 8:00 PM
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 <span>Nexa Creation</span>. All rights reserved. Crafted with ❤️ in Hyderabad.</div>
+    <div class="footer-tagline">Where Creativity Meets Technology ✦</div>
+  </div>
+</footer>
+
+<!-- ===== WHATSAPP FLOAT ===== -->
+<div class="whatsapp-float">
+  <div class="wa-tooltip">Chat with us! <strong>+91 70935 28048</strong></div>
+  <a href="https://wa.me/917093528048" target="_blank" class="wa-btn" title="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 6 + 'px';
+    cursor.style.top = my - 6 + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.15;
+    ry += (my - ry) * 0.15;
+    ring.style.left = rx - 18 + 'px';
+    ring.style.top = ry - 18 + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button, .service-card, .bento-item').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; ring.style.transform = 'scale(1.5)'; ring.style.opacity = '0.8'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; ring.style.opacity = '0.5'; });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Counter animation
+  function animateCounter(el, target) {
+    let current = 0;
+    const increment = target / 60;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current) + (el.dataset.count > 100 ? '+' : '');
+    }, 30);
+  }
+  const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('[data-count]').forEach(el => {
+          animateCounter(el, parseInt(el.dataset.count));
+        });
+        statsObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+  const statsStrip = document.querySelector('.stats-strip');
+  if (statsStrip) statsObserver.observe(statsStrip);
+
+  // Nav scroll effect
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 60
+      ? 'rgba(5,8,16,0.98)'
+      : 'rgba(7,11,20,0.85)';
+  });
+</script>
+</body>
+</html>
